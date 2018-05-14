@@ -64,3 +64,26 @@ def triangles(num):
         x = x + 1
 # triangles(10)
 
+# 利用map跟reduce编写一个str2float函数
+from functools import reduce
+def str2float(s):
+    L = {'0': 0,'1': 1,'2': 2,'3': 3,'4': 4,'5': 5,'6': 6,'7': 7,'8': 8,'9': 9}
+    def a(x):
+        return L[x]
+    r = s.split('.')
+    r1 = list(map(a, r[0]))
+    r2 = list(map(a, r[1]))
+    return reduce(lambda x, y:x * 10 + y, r1) + reduce(lambda x, y:x * 10 +y, r2) / 10**len(r2)
+# print(str2float('123123.2212'))
+
+# 回数是指从左向右读和从右向左读都是一样的数，例如12321，909。请利用filter()筛选出回数：
+def is_palindrome(n):
+    LL = str(n)
+    y = len(LL) // 2
+    if len(LL) == 1:
+        return n
+    elif LL[:y] == LL[-y:]:
+        return n
+# 测试:
+output = filter(is_palindrome, range(1, 1000))
+print('1~1000:', list(output))
